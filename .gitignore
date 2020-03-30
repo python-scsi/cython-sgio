@@ -1,0 +1,13 @@
+*.egg-info/
+*.pyc
+*.so
+*venv/
+*~
+.cache
+.idea/
+.mypy_cache/
+/MANIFEST
+/build/
+/dist/
+/src/*.c
+__pycache__/
