@@ -6,10 +6,3 @@ pull_request_rules:
     actions:
       merge:
         method: rebase
-  - name: Automatic merge from Flameeyes
-    conditions:
-      - "author=Flameeyes"
-      - "status-success=Travis CI - Pull Request"
-    actions:
-      merge:
-        method: rebase
