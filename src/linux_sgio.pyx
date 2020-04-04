@@ -86,8 +86,8 @@ class UnspecifiedError(Exception):
 
 def execute(
         fid,
-        bytearray cdb,
-        bytearray data_out,
+        cdb,
+        data_out,
         bytearray data_in,
 ):
     cdef sg_io_hdr_t io_hdr
@@ -107,15 +107,25 @@ def execute(
     io_hdr.flags = 0
     io_hdr.mx_sb_len = len(sense)
 
-    if len(data_out) and len(data_in):
+    if data_out is not None:
+        data_out_len = len(data_out)
+    else:
+        data_out_len = 0
+
+    if data_in is not None:
+        data_in_len = len(data_in)
+    else:
+        data_in_len = 0
+
+    if data_out_len and data_in_len:
         raise NotImplemented('Indirect IO is not supported.')
-    elif len(data_out):
+    elif data_out_len:
         io_hdr.dxfer_direction = SG_DXFER_TO_DEV
-        io_hdr.dxfer_len = len(data_out)
+        io_hdr.dxfer_len = data_out_len
         io_hdr.dxferp = data_out
-    elif len(data_in):
+    elif data_in_len:
         io_hdr.dxfer_direction = SG_DXFER_FROM_DEV
-        io_hdr.dxfer_len = len(data_in)
+        io_hdr.dxfer_len = data_in_len
         io_hdr.dxferp = &input_view[0]
     else:
         io_hdr.dxfer_len = 0
