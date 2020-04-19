@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
+# SPDX-FileCopyrightText: 2020 The cython-sgio Authors
 #
-# SPDX-FileCopyrightText: © 2020 The cython-sgio Authors
-# SPDX-License-Identifier: LGPL-2.1+
+# SPDX-License-Identifier: LGPL-2.1-or-later
 
 import sys
 
