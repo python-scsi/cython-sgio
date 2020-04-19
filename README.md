@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2020 The cython-sgio Authors
+
+SPDX-License-Identifier: LGPL-2.1-or-later
+-->
+
 # cython-sgio
 
 Cython-based wrapper for sending SCSI Generic I/O commands from

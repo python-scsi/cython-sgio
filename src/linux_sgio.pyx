@@ -1,7 +1,9 @@
 # cython: language_level=3
+
+# SPDX-FileCopyrightText: 2014 The cython-sgio Authors
 #
-# SPDX-FileCopyrightText: © 2014 The cython-sgio Authors
-# SPDX-License-Identifier: LGPL-2.1+
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
 """Cython bindings for the Linux SGIO ioctl interface.
 
 References:
