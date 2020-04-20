@@ -32,9 +32,6 @@ cdef extern from "scsi/sg.h":
         SG_IO
 
     cdef enum:
-        SCSI_STATUS_CHECK_CONDITION
-
-    cdef enum:
         SG_DXFER_NONE
         SG_DXFER_TO_DEV
         SG_DXFER_FROM_DEV
