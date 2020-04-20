@@ -104,7 +104,7 @@ def execute(
     io_hdr.sbp = sense
     io_hdr.timeout = 1800000
     io_hdr.flags = 0
-    io_hdr.mx_sb_len = len(sense)
+    io_hdr.mx_sb_len = 32  # we allocate it ourselves.
 
     if data_out is not None:
         data_out_len = len(data_out)
