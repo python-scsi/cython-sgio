@@ -90,12 +90,13 @@ def execute(
         cdb,
         data_out,
         bytearray data_in,
+        max_sense_data_length = 32,
 ):
     cdef sg_io_hdr_t io_hdr
     cdef unsigned char[:] input_view = data_in
 
     cdef unsigned char *sense = <unsigned char *> calloc(
-        32, sizeof(unsigned char))
+        max_sense_data_length, sizeof(unsigned char))
     if not sense:
         raise MemoryError()
 
@@ -108,7 +109,7 @@ def execute(
         io_hdr.sbp = sense
         io_hdr.timeout = 1800000
         io_hdr.flags = 0
-        io_hdr.mx_sb_len = 32  # we allocate it ourselves.
+        io_hdr.mx_sb_len = max_sense_data_length
 
         if data_out is not None:
             data_out_len = len(data_out)
