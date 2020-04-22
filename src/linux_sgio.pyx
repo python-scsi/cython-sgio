@@ -75,7 +75,9 @@ class CheckConditionError(Exception):
     """
 
     def __init__(self, sense):
-        super(CheckConditionError, self).__init__()
+        super(CheckConditionError, self).__init__(
+            'SCSI Check Condition: %s' % sense.hex()
+        )
         self.sense = sense
 
 
