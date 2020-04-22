@@ -92,6 +92,38 @@ def execute(
         bytearray data_in,
         max_sense_data_length = 32,
 ):
+    """Execute a SCSI Generic ioctl on the provided file object.
+
+    This function wraps the call to the C-level ioctl() method for the
+    Linux SCSI Generic interface. While Python provides a wrapper for
+    ioctl() as part of the standard library, the SG interface requires
+    providing output pointers as well as an input structure.
+
+    Args:
+      fid: The file object to execute the ioctl() on.
+      cdb: A bytes, bytearray or compatible object with the Command
+        Buffer to send.
+      data_out: A bytes, bytearray or compatible object with the data
+        to send together with the CDB.
+      data_in: A bytearray allocated to the length of the expected
+        data to receive in the CDB response.
+      max_sense_data_length: An optional maximum number of bytes to
+        allocate to receive Sense Data in case of Check Condition
+        failures.
+
+    Returns:
+      The number of bytes written or received from a successful
+      ioctl().
+
+    Raises:
+
+      MemoryError: if the allocation of the sense data failed.
+      OSError: if the ioctl() call failed.
+      CheckConditionError: if a SCSI Check Condition was received from
+        the device.
+      UnspecifiedError: if the ioctl() succeded, an error occurred,
+        but no Check Condition was received.
+    """
     cdef sg_io_hdr_t io_hdr
     cdef unsigned char[:] input_view = data_in
 
