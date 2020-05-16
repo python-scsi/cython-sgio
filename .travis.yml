@@ -20,4 +20,4 @@ install:
   - pip install .[dev]
 
 script:
-  - if [[ $PRE_COMMIT ]]; then pre-commit install; pre-commit run --all-files; fi
+  - if [[ $PRE_COMMIT ]]; then pre-commit run --all-files; fi
