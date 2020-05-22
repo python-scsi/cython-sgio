@@ -4,7 +4,7 @@
 
 import sys
 
-from setuptools import Extension, find_packages, setup
+from setuptools import Extension, setup
 
 # Ensure it's present.
 import setuptools_scm  # noqa: F401
@@ -19,18 +19,4 @@ if not configured_extensions:
     raise NotImplementedError("No SGIO implemented for " + sys.platform)
 
 
-setup(
-    packages=find_packages(),
-    package_data={"": ["*.pyx", "*.pxd"]},
-    ext_modules=cythonize(configured_extensions),
-    extras_require={
-        "dev": [
-            "Cython",
-            "mypy",
-            "pre-commit",
-            "setuptools>=42",
-            "setuptools_scm[toml]>=3.4",
-            "wheel",
-        ]
-    },
-)
+setup(ext_modules=cythonize(configured_extensions),)
