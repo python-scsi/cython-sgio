@@ -4,11 +4,10 @@
 
 import sys
 
-from setuptools import Extension, setup
-
 # Ensure it's present.
 import setuptools_scm  # noqa: F401
 from Cython.Build import cythonize
+from setuptools import Extension, setup
 
 configured_extensions = []
 
@@ -19,4 +18,6 @@ if not configured_extensions:
     raise NotImplementedError("No SGIO implemented for " + sys.platform)
 
 
-setup(ext_modules=cythonize(configured_extensions),)
+setup(
+    ext_modules=cythonize(configured_extensions),
+)

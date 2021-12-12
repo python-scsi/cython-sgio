@@ -21,11 +21,12 @@ See Also:
      http://www.tldp.org/HOWTO/SCSI-Generic-HOWTO/index.html
 """
 
-from cpython.bytearray cimport PyByteArray_FromStringAndSize
+from posix.ioctl cimport ioctl
 
+from cpython.bytearray cimport PyByteArray_FromStringAndSize
 from libc.errno cimport errno
 from libc.stdlib cimport calloc, free
-from posix.ioctl cimport ioctl
+
 
 cdef extern from "scsi/sg.h":
     cdef enum:
