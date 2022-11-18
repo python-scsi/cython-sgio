@@ -92,6 +92,7 @@ def execute(
         data_out,
         bytearray data_in,
         max_sense_data_length = 32,
+        return_sense_buffer=False
 ):
     """Execute a SCSI Generic ioctl on the provided file object.
 
@@ -179,7 +180,10 @@ def execute(
             else:
                 raise UnspecifiedError()
 
-        # Return the actual transfer written.
-        return io_hdr.resid
+        # Return the actual transfer written and any sense we got.
+        if return_sense_buffer:
+            return io_hdr.resid, bytes(sense[:io_hdr.sb_len_wr])
+        else:
+            return io_hdr.resid
     finally:
         free(sense)
