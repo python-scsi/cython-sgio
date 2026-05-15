@@ -92,7 +92,8 @@ def execute(
         data_out,
         bytearray data_in,
         max_sense_data_length = 32,
-        return_sense_buffer=False
+        return_sense_buffer=False,
+        timeout=1800000
 ):
     """Execute a SCSI Generic ioctl on the provided file object.
 
@@ -112,6 +113,9 @@ def execute(
       max_sense_data_length: An optional maximum number of bytes to
         allocate to receive Sense Data in case of Check Condition
         failures.
+      return_sense_buffer: Return the sense data buffer whether
+        SG_INFO_OK or Not.
+      timeout: Set timeout for command execution, in milliseconds.
 
     Returns:
       The number of bytes written or received from a successful
@@ -141,7 +145,7 @@ def execute(
         io_hdr.iovec_count = 0
         io_hdr.cmdp = cdb
         io_hdr.sbp = sense
-        io_hdr.timeout = 1800000
+        io_hdr.timeout = timeout
         io_hdr.flags = 0
         io_hdr.mx_sb_len = max_sense_data_length
 
